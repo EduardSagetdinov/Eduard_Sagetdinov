@@ -10,22 +10,32 @@ namespace Epam.Task1.SQUARE
 {
     class Program
     {
+        static void DrawLine(int m)
+        {
+            for(int j=1; j<=m; j++)
+            {
+                Console.Write('*');
+            }
+            
+        }
         static void DrawSquare(int n)
         {
             int half=n/2+1;
-            String s;
+            
             for(int i=1; i<=n; i++)
             {
                 if(i!=half)
                 {
-                    s = new String('*',n);
-                    Console.WriteLine(s);
-                }else
+
+                    DrawLine(n);
+                    Console.WriteLine();
+                }
+                else
                 {
-                    s = new String('*', (half - 1));
-                    Console.Write(s);
-                    Console.Write(" ");
-                    Console.WriteLine(s);
+                    DrawLine(half - 1);
+                    Console.Write(' ');
+                    DrawLine(half - 1);
+                    Console.WriteLine();
                 }
             }
 
