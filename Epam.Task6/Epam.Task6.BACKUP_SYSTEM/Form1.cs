@@ -20,7 +20,7 @@ namespace Epam.Task6.BACKUP_SYSTEM
             button3.Enabled = false;
         }
 
-        public static string Path { get; set; }
+        public static string Paths { get; set; }
 
         public static string LogPath { get; set; }
 
@@ -37,9 +37,9 @@ namespace Epam.Task6.BACKUP_SYSTEM
                 MessageBox.Show(text: "You haven't chosen some directory for observe!!!");
             }
 
-            Path = folderBrowserDialog1.SelectedPath;
-            MessageBox.Show(text: $"You have chosen: {Path}");
-            this.fileSystemWatcher1.Path = Path;
+            Paths = folderBrowserDialog1.SelectedPath;
+            MessageBox.Show(text: $"You have chosen: {Paths}");
+            this.fileSystemWatcher1.Path = Paths;
             fileSystemWatcher1.NotifyFilter = NotifyFilters.Size | NotifyFilters.FileName;
         }
 
@@ -52,9 +52,9 @@ namespace Epam.Task6.BACKUP_SYSTEM
 
             LogPath = folderBrowserDialog2.SelectedPath;
             MessageBox.Show(text: $"You logs will be in: {LogPath}");
-            if (!File.Exists(System.IO.Path.Combine(LogPath, "MainLog.txt")))
+            if (!File.Exists(Path.Combine(LogPath, "MainLog.txt")))
             {
-                File.Create(System.IO.Path.Combine(LogPath, "MainLog.txt"));
+                File.Create(Path.Combine(LogPath, "MainLog.txt"));
             }
 
             button1.Enabled = false;
@@ -66,7 +66,7 @@ namespace Epam.Task6.BACKUP_SYSTEM
 
         public void FileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
         {
-            string dir = System.IO.Path.Combine(LogPath, System.IO.Path.GetDirectoryName(e.Name));
+            string dir = Path.Combine(LogPath, Path.GetDirectoryName(e.Name));
             
                 DirectoryInfo directoryInfo = new DirectoryInfo(dir);
                 if (!directoryInfo.Exists)
@@ -74,24 +74,24 @@ namespace Epam.Task6.BACKUP_SYSTEM
                     directoryInfo.Create();
                 }
 
-            string p = System.IO.Path.Combine(LogPath, System.IO.Path.GetDirectoryName(e.Name), System.IO.Path.GetFileNameWithoutExtension(e.Name));
-            MakingWithFile(e.FullPath, e.FullPath, p);
+            string p = Path.Combine(LogPath, Path.GetDirectoryName(e.Name), Path.GetFileNameWithoutExtension(e.Name));
+            this.MakingWithFile(e.FullPath, e.FullPath, p);
         }
 
         public void FileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
         {
-            string oldName = System.IO.Path.Combine(LogPath, System.IO.Path.GetDirectoryName(e.Name), System.IO.Path.GetFileNameWithoutExtension(e.OldName));
-            string newName = System.IO.Path.Combine(LogPath, System.IO.Path.GetDirectoryName(e.Name), System.IO.Path.GetFileNameWithoutExtension(e.Name));
+            string oldName = Path.Combine(LogPath, Path.GetDirectoryName(e.Name), Path.GetFileNameWithoutExtension(e.OldName));
+            string newName = Path.Combine(LogPath, Path.GetDirectoryName(e.Name), Path.GetFileNameWithoutExtension(e.Name));
             File.Move(oldName, newName);
-            MakingWithFile(e.OldFullPath, e.FullPath, newName);
+            this.MakingWithFile(e.OldFullPath, e.FullPath, newName);
         }
 
-        private static void MakingWithFile(string oldName, string newName, string logPath)
+        private void MakingWithFile(string oldName, string newName, string logPath)
         {
+            fileSystemWatcher1.EnableRaisingEvents = false;
             string[] str;
-            Thread.Sleep(1000);
             str = File.ReadAllLines(newName);
-            Thread.Yield();
+           
             using (StreamWriter sr = File.AppendText(logPath))
             {
                 sr.WriteLine(oldName);
@@ -101,7 +101,8 @@ namespace Epam.Task6.BACKUP_SYSTEM
                     sr.WriteLine(item);
                 }
 
-                sr.WriteLine(DateTime.Now.ToString("yyyyMMddhhmm"));
+                sr.WriteLine(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"));
+                fileSystemWatcher1.EnableRaisingEvents = true;
             }
         }
 
@@ -111,21 +112,21 @@ namespace Epam.Task6.BACKUP_SYSTEM
 
         private void FileSystemWatcher1_Created(object sender, FileSystemEventArgs e)
         {
-            string p = System.IO.Path.Combine(LogPath, System.IO.Path.GetDirectoryName(e.Name), System.IO.Path.GetFileNameWithoutExtension(e.Name));
-            string dir = System.IO.Path.Combine(LogPath, System.IO.Path.GetDirectoryName(e.Name));
+            string p = Path.Combine(LogPath, Path.GetDirectoryName(e.Name), Path.GetFileNameWithoutExtension(e.Name));
+            string dir = Path.Combine(LogPath, Path.GetDirectoryName(e.Name));
             DirectoryInfo directoryInfo = new DirectoryInfo(dir);
             if (!directoryInfo.Exists)
             {
                 directoryInfo.Create();
             }
-
-            MakingWithFile(e.FullPath, e.FullPath, p);
+            
+            this.MakingWithFile(e.FullPath, e.FullPath, p);
         }
 
         private void Button3_Click(object sender, EventArgs e)
         {
             button4.Enabled = true;
-            openFileDialog1.InitialDirectory = Path;
+            openFileDialog1.InitialDirectory = Paths;
 
             openFileDialog1.ShowDialog();
             Recover = openFileDialog1.FileName;
@@ -153,55 +154,71 @@ namespace Epam.Task6.BACKUP_SYSTEM
 
         private void Button4_Click(object sender, EventArgs e)
         {
-            string date = monthCalendar1.SelectionEnd.ToString("yyyyMMdd");
-            string time = dateTimePicker1.Value.TimeOfDay.ToString("hhmm");
-            string fullDate = string.Concat(date, time);
-            long fromPicker = long.Parse(fullDate);
+            DateTime date = monthCalendar1.SelectionEnd.Date;
+            TimeSpan time = dateTimePicker1.Value.TimeOfDay;
+            DateTime fullDate = date.Add(time);
+            
             string oldPath = openFileDialog1.FileName;
-            string partPath = Recover.Substring(Path.Length + 1);
-            string loP = System.IO.Path.Combine(LogPath, partPath.Substring(0, partPath.Length - 4));
-            long numb;
-            long min = 200;
+            string partPath = Recover.Substring(Paths.Length + 1);
+            string loP = Path.Combine(LogPath, partPath.Substring(0, partPath.Length - 4));
+            DateTime numb;
+            this.fileSystemWatcher1.EnableRaisingEvents = false;
             Stack<string> lines = new Stack<string>();
             using (StreamReader reader = File.OpenText(loP))
             {
                 string line;
                  while ((line = reader.ReadLine()) != null)
-                {
+                 {
                     lines.Push(line);
-                }
+                 }
             }
-
+           
             while (lines.Count != 0)
             {
-                if (long.TryParse(lines.Pop(), out numb))
+                string findDate = lines.Pop();
+                
+                if (DateTime.TryParse(findDate, out numb))
                 {
-                    if (Math.Abs(numb - fromPicker) < min)
+                  if (Math.Abs(numb.Subtract(fullDate).TotalMinutes) < 2)
                     {
-                        min = numb;
+                      break;
                     }
                 }
-
-                break;
             }
-
-            while (lines.Count != 0)
-            {
-                using (StreamWriter strWriter = File.CreateText(System.IO.Path.Combine(LogPath, "back.txt")))
+            
+            using (StreamWriter strWriter = File.CreateText(Path.Combine(LogPath, "back.txt")))
                 {
+                    while (lines.Count != 0)
+                    {
                     string words = lines.Pop();
-                    if (!words.Contains(".txt"))
-                    {
+                    if (!words.Contains("txt"))
+                        {
                         strWriter.WriteLine(words);
+                        }
+                        else
+                        {
+                        lines.Push(words);
+                        break;
+                        }
                     }
                 }
 
-                break;
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            if (lines.Count != 0)
+            {
+                string backPath = lines.Pop();
+                File.Delete(oldPath);
+                File.Delete(loP);
+                File.Move(Path.Combine(LogPath, "back.txt"), backPath);
+                File.Delete(Path.Combine(LogPath, "back.txt"));
             }
-
-            string backPath = lines.Pop();
-            File.Delete(oldPath);
-            File.Move(System.IO.Path.Combine(LogPath, "back.txt"), backPath);
+            else
+            {
+                File.Delete(oldPath);
+                File.Delete(loP);
+                File.Delete(Path.Combine(LogPath, "back.txt"));
+            }
+            
             MessageBox.Show("Backuped!!!!");
         }
     }
