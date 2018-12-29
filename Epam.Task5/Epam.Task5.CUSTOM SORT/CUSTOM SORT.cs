@@ -8,29 +8,33 @@ namespace Epam.Task5.CUSTOM_SORT
 {
     public static class CUSTOM_SORT
     {
-        public static void Sorting<T>(T[] sortArr, Func<T, T, bool> comparator)
+       public static int Partition<T>(T[] m, int a, int b, Func<T, T, bool> comparator)
         {
-            if (comparator == null)
+            var i = a;
+            for (int j = a; j <= b; j++)        
             {
-                throw new ArgumentNullException(nameof(comparator));
-            }
-
-            bool flag = true;
-            do
-            {
-                flag = false;
-                for (int i = 0; i < sortArr.Length - 1; i++)
+                if (!comparator(m[j], m[b]))  
                 {
-                    if (comparator(sortArr[i + 1], sortArr[i]))
-                    {
-                        var temp = sortArr[i];
-                        sortArr[i] = sortArr[i + 1];
-                        sortArr[i + 1] = temp;
-                        flag = true;
-                    }
+                    T t = m[i];                
+                    m[i] = m[j];                 
+                    m[j] = t;                   
+                    i++;                        
                 }
             }
-            while (flag);
+            
+            return i - 1;                       
+        }
+
+        public static void Quicksort<T>(T[] m, int a, int b, Func<T, T, bool> comparator)
+        {                                       
+          if (a >= b)
+            {
+                return;
+            }
+
+            var c = Partition(m, a, b, comparator);
+            Quicksort(m, a, c - 1, comparator);
+            Quicksort(m, c + 1, b, comparator);
         }
     }
 }
