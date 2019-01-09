@@ -14,12 +14,7 @@ namespace Epam.Task7.Users.DAL
         
         public void AddAward(Awards award)
         {
-            if (!File.Exists(FileAwardsPath))
-            {
-                using (FileStream fs = File.Create(FileAwardsPath))
-                {
-                }
-            }
+            FileExists();
 
             var listOfAwards = File.ReadAllLines(FileAwardsPath).ToList();
             var hashAwards = new HashSet<string>();
@@ -35,7 +30,7 @@ namespace Epam.Task7.Users.DAL
                     hashAwards.Add(infoAward[1]);
                     if (int.TryParse(infoAward[0], out int id) && this.max < id)
                     {
-                       this.max = id;
+                        this.max = id;
                     }
                 }
 
@@ -52,6 +47,7 @@ namespace Epam.Task7.Users.DAL
 
         public void DelAward(int id)
         {
+            FileExists();
             var arrayOfAwards = File.ReadAllLines(FileAwardsPath);
             List<string> listOfAwards = arrayOfAwards.ToList();
 
@@ -72,6 +68,7 @@ namespace Epam.Task7.Users.DAL
 
         public IEnumerable<Awards> GetAll()
         {
+            FileExists();
             var arrayOfAwards = File.ReadAllLines(FileAwardsPath);
             List<Awards> awardList = new List<Awards>();
             string line;
@@ -97,6 +94,7 @@ namespace Epam.Task7.Users.DAL
 
         public bool UpdAward(Awards award)
         {
+            FileExists();
             var arrayOfAwards = File.ReadAllLines(FileAwardsPath);
 
             List<string> listOfAwards = arrayOfAwards.ToList();
@@ -117,6 +115,16 @@ namespace Epam.Task7.Users.DAL
             }
 
             return false;
+        }
+
+        private static void FileExists()
+        {
+            if (!File.Exists(FileAwardsPath))
+            {
+                using (FileStream fs = File.Create(FileAwardsPath))
+                {
+                }
+            }
         }
     }
 }

@@ -14,15 +14,10 @@ namespace Epam.Task7.Users.DAL
 
         public void AddUser(User user)
         {
-            if (!File.Exists(FileUsersPath))
-            {
-                using (FileStream fs = File.Create(FileUsersPath))
-                {
-                }
-            }
-            
+            FileExists();
+
             var listOfUsers = File.ReadAllLines(FileUsersPath);
-           
+
             if (listOfUsers.Length == 0)
             {
                 user.Id = 0;
@@ -40,7 +35,7 @@ namespace Epam.Task7.Users.DAL
 
                 user.Id = ++this.max;
             }
-            
+
             using (StreamWriter newUser = File.AppendText(FileUsersPath))
             {
                 newUser.WriteLine(user.ToString());
@@ -49,6 +44,7 @@ namespace Epam.Task7.Users.DAL
 
         public void DeleteUser(int id)
         {
+            FileExists();
             var arrayOfUsers = File.ReadAllLines(FileUsersPath);
             List<string> listOfUsers = arrayOfUsers.ToList();
 
@@ -69,6 +65,7 @@ namespace Epam.Task7.Users.DAL
 
         public bool UpdateUser(User user)
         {
+            FileExists();
             var arrayOfUsers = File.ReadAllLines(FileUsersPath);
            
            List<string> listOfUsers = arrayOfUsers.ToList();
@@ -93,6 +90,7 @@ namespace Epam.Task7.Users.DAL
         
         public IEnumerable<User> GetAll()
         {
+            FileExists();
             var arrayOfUsers = File.ReadAllLines(FileUsersPath);
             List<User> userList = new List<User>();
             string line;
@@ -114,6 +112,16 @@ namespace Epam.Task7.Users.DAL
                 }
 
                 return userList;
+            }
+        }
+
+        private static void FileExists()
+        {
+            if (!File.Exists(FileUsersPath))
+            {
+                using (FileStream fs = File.Create(FileUsersPath))
+                {
+                }
             }
         }
     }

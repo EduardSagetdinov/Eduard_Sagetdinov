@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Epam.Task7.Users.BLL.Interface;
 using Epam.Task7.Users.DAL;
 using Epam.Task7.Users.Entities;
@@ -21,8 +22,11 @@ namespace Epam.Task7.Users.BLL
         {
             if (user != null)
             {
-                this.cacheLogicUser.Delete(AllUsersCacheKey);
-                this.userDao.AddUser(user);
+                if ((DateTime.Now.Year - user.DateOfBirth.Year >= 5) && (DateTime.Now.Year - user.DateOfBirth.Year   <= 130))
+                {
+                    this.cacheLogicUser.Delete(AllUsersCacheKey);
+                    this.userDao.AddUser(user);
+                }
             }
         }
 
@@ -33,7 +37,10 @@ namespace Epam.Task7.Users.BLL
 
         public void UpdateUser(User user)
         {
-            this.userDao.UpdateUser(user);
+            if ((DateTime.Now.Year - user.DateOfBirth.Year >= 5) && (DateTime.Now.Year - user.DateOfBirth.Year <= 130))
+            {
+                this.userDao.UpdateUser(user);
+            }
         }
 
         public IEnumerable<User> GetAll()

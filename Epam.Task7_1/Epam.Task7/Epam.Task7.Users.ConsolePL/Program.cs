@@ -58,7 +58,7 @@ namespace Epam.Task7.Users.ConsolePL
             {
                 Id = 2,
                 Name = "Peter",
-                DateOfBirth = new DateTime(1986, 07, 24),
+                DateOfBirth = new DateTime(56),
             };
             var user3 = new User
             {
