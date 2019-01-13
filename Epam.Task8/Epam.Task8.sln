@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.DATE EXISTANCE", "Epam.Task8.DATE EXISTANCE\Epam.Task8.DATE EXISTANCE.csproj", "{E32E28FA-AE5C-4B9F-8DFE-B71C0A91725F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.HTML REPLACER", "Epam.Task8.HTML REPLACER\Epam.Task8.HTML REPLACER.csproj", "{A5BC6196-4335-44A6-84AB-9666ABB1CC81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.EMAIL FINDER", "Epam.Task8.EMAIL FINDER\Epam.Task8.EMAIL FINDER.csproj", "{2884F0D3-0C88-4EBE-BB19-7FB8522217F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.NUMBER VALIDATOR", "Epam.Task8.NUMBER VALIDATOR\Epam.Task8.NUMBER VALIDATOR.csproj", "{8E2DF613-AE7F-4753-AE65-D6D722E4AD94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Task8.TIME COUNTER", "Epam.Task8.TIME COUNTER\Epam.Task8.TIME COUNTER.csproj", "{6CF0B06E-42CC-4F01-B97F-71C00EB15A4C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E32E28FA-AE5C-4B9F-8DFE-B71C0A91725F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E32E28FA-AE5C-4B9F-8DFE-B71C0A91725F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E32E28FA-AE5C-4B9F-8DFE-B71C0A91725F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E32E28FA-AE5C-4B9F-8DFE-B71C0A91725F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5BC6196-4335-44A6-84AB-9666ABB1CC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5BC6196-4335-44A6-84AB-9666ABB1CC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5BC6196-4335-44A6-84AB-9666ABB1CC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5BC6196-4335-44A6-84AB-9666ABB1CC81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2884F0D3-0C88-4EBE-BB19-7FB8522217F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2884F0D3-0C88-4EBE-BB19-7FB8522217F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2884F0D3-0C88-4EBE-BB19-7FB8522217F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2884F0D3-0C88-4EBE-BB19-7FB8522217F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E2DF613-AE7F-4753-AE65-D6D722E4AD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2DF613-AE7F-4753-AE65-D6D722E4AD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2DF613-AE7F-4753-AE65-D6D722E4AD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2DF613-AE7F-4753-AE65-D6D722E4AD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF0B06E-42CC-4F01-B97F-71C00EB15A4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF0B06E-42CC-4F01-B97F-71C00EB15A4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF0B06E-42CC-4F01-B97F-71C00EB15A4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF0B06E-42CC-4F01-B97F-71C00EB15A4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {429BFEE5-F66B-48EC-A2F0-AC40D0861129}
+	EndGlobalSection
+EndGlobal
