@@ -8,7 +8,7 @@
 }
 
 button {
-    width: 30px;
+    width: 50px;
     margin: 2px;
 }
 
@@ -32,9 +32,7 @@ li {
     margin: 0;
 }
 
-.selectedClass {
-    background-color: #a3c8f5;
-}
+
 
 .box {
     margin: 10px;
