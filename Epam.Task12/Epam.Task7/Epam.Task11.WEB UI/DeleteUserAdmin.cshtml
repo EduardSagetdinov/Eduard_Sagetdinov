@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    @RenderPage("~/_deleteUserAdmin.cshtml")
+    <form action="" method="post">
+        <div>
+            <label for="userLogin">Select login for delete: </label>
+            <input type="text" id="userLogin" name="userLogin" value="" />
+            <input type="submit" name="delete" value="delete" />
+        </div>
+    </form>
+    <a href="~/AboutUsers.cshtml">Back</a>
+</body>
+</html>

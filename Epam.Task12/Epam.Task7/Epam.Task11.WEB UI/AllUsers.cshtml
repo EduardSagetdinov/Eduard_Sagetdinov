@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+     <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <form action="" method="post">
+        <div>
+
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a id="newUser" href="~/AddUser.cshtml">Add new user</a>
+                <a id="deleteUser" href="~/DeleteUser.cshtml">Delete user</a>
+                <a id="updateUser" href="~/UpdateUser.cshtml">Update user</a>
+            }
+            else
+            {
+                <h1>Sorry! But I don't know such user! You can to create new account or just to see all users without awards.</h1>
+            }
+            @RenderPage("~/_allUsers.cshtml")
+            <a id="back" href="~/Index.cshtml">Back</a>
+        </div>
+        
+    </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @{ 
+            var userAdminLogic = DependencyResolver.UserAdminLogic;
+        }
+        @if (IsPost)
+        {
+            var user = Request["UserName"];
+            var password = Request["Password"];
+            if (userAdminLogic.isCorrectPass(user, password) || (user == "admin" && password == "admin"))
+            {
+                FormsAuthentication.SetAuthCookie(user, createPersistentCookie: true);
+            }
+            else
+            {
+                Response.Redirect("~/AllUsers");
+            }
+            Response.Redirect("~");
+        }
+        <form action="~/LogIn.cshtml" method="post">
+            <label for="UserName">Login</label>
+            <input type="text" id="UserName" name="UserName" />
+            <label for="Password">Password</label>
+            <input type="password" id="Password" name="Password" />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

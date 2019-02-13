@@ -1,0 +1,31 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Date of birth</th>
+        <th>Age</th>
+        <th>Photo</th>
+    </tr>
+
+    @{
+        var userLogic = DependencyResolver.UserLogic;
+
+        var sss = userLogic.GetAll();
+        foreach (var user in sss)
+        {
+            <tr>
+                <th><p>@user.Id</p></th>
+                <th><p>@user.Name</p></th>
+                <th><p>@user.DateOfBirth.ToShortDateString()</p></th>
+                <th><p>@(DateTime.Now.Year - user.DateOfBirth.Year)</p></th>
+                <th><img src="@user.photoUserLink" width="50" height="50" /></th>
+            </tr>
+
+        }
+    }
+
+</table>

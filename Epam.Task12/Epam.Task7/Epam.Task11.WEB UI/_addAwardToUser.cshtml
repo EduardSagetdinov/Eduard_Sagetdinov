@@ -1,0 +1,22 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@if (IsPost)
+{
+    int idUs = -5;
+    int idAw = -5;
+    var userAwardLogic = DependencyResolver.UserAwardsLogic;
+    int.TryParse(Request.Params["iduser"], out idUs);
+    int.TryParse(Request.Params["idaward"], out idAw);
+    if ((idUs != -5) && (idAw != -5))
+    {
+        var userAward = new UsersAwards
+        {
+            IdUser = idUs,
+            IdAward = idAw,
+
+        };
+        userAwardLogic.AddUserAward(userAward);
+    }
+}

@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <form action="" method="post">
+        <div>
+            @RenderPage("~/_updateUser.cshtml")
+            <label>Select id of user for update: </label>
+            <input type="number" min="0" step="1" name="iduser" value="" />
+            <label>Enter new name: </label>
+            <input type="text" name="nameUser" value="" />
+            <label>Enter new date of birth: </label>
+            <input type="date" step="1" name="dateUser" value="" />
+            <label>Enter the path to your new photo: </label>
+            <input type="text" name="userPhoto" value="" />
+            <input type="submit" name="delete" value="update" />
+        </div>
+    </form>
+    <a href="AddAwardToUser.cshtml">Add award for user</a>
+    <a href="~/AllUsers.cshtml">Back</a>
+</body>
+</html>

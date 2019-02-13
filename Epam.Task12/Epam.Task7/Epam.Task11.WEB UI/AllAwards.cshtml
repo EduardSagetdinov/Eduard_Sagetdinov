@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <form action="" method="post">
+        <div>
+
+            @RenderPage("~/_allAwards.cshtml")
+
+            <a id="newAward" href="~/AddAward.cshtml">Add new award</a>
+            <a id="deleteAward" href="~/DeleteAward.cshtml">Delete award</a>
+            <a id="updateAward" href="~/UpdateAward.cshtml">Update award</a>
+            <a id="deleteUsersAward" href="~/DeleteAwardOfUser.cshtml">Delete the user's award</a>
+            <a id="back" href="~/Index.cshtml">Back</a>
+        </div>
+
+    </form>
+</body>
+</html>
