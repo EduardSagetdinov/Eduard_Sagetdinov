@@ -1,0 +1,49 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <form action="/AllUsers.cshtml" method="post" id="users">
+        <div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="~/LogOut.cshtml">Log out</a>
+                if (User.IsInRole("Admin"))
+                {
+                    <p>Admin</p>
+                }
+            }
+            else
+            {
+                <a href="~/LogIn.cshtml">Log in</a>
+            }
+            <p>Hello, @User.Identity.Name</p>
+
+           
+            @if (User.IsInRole("User"))
+            {
+                <a href="~/AllInfoUser.cshtml">Users and Awards</a>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/AllUsers.cshtml">Users</a>
+                <a href="~/AllAwards.cshtml">Awards</a>
+                <a href="~/AllInfoUser.cshtml">Users and Awards</a>
+                <a href="~/AboutUsers.cshtml">User's politics</a>
+            }
+
+        </div>
+    </form>
+</body>
+</html>

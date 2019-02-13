@@ -1,0 +1,44 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Photo of user</th>
+        <th>Name</th>
+        <th>Date of birth</th>
+        <th>Age</th>
+        <th>Title and photo</th>
+    </tr>
+
+    @{
+        var userLogic = DependencyResolver.UserLogic;
+        var userAwardLogic = DependencyResolver.UserAwardsLogic;
+        var awardLogic = DependencyResolver.AwardLogic;
+        var sss = userLogic.GetAll();
+        foreach (var user in sss)
+        {
+    <tr>
+        <th><p>@user.Id</p></th>
+        <th><img src="@user.photoUserLink" width="50" height="50" /></th>
+        <th><p>@user.Name</p></th>
+        <th><p>@user.DateOfBirth</p></th>
+        <th><p>@(DateTime.Now.Year - user.DateOfBirth.Year)</p></th>
+        <th><p>
+    @foreach (var item in userAwardLogic.GetAwardsOfUser(user))
+    {
+        @item
+        <p>   </p>
+    }
+    @foreach (var punct in userAwardLogic.GetPhotoAwardsOfUser(user))
+    {
+        <img src="@punct" width="50" height="50" />
+    }
+    </p></th>
+    </tr>
+
+        }
+    }
+
+</table>

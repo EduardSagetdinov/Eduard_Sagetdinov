@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <form action="" method="post">
+        <div>
+            @RenderPage("~/_updateAward.cshtml")
+            <label>Select id of award for update: </label>
+            <input type="number" min="0" step="1" name="idAward" value="" />
+            <label>Enter new title: </label>
+            <input type="text" name="nameAward" value="" />
+            <label>Input the path to award's new photo: </label>
+            <input type="text" name="photoPath" value="" />
+            <input type="submit" name="delete" value="update" />
+        </div>
+    </form>
+    <a href="~/AllAwards.cshtml">Back</a>
+</body>
+</html>

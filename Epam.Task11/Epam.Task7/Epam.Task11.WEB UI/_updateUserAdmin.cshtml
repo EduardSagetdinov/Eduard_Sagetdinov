@@ -1,0 +1,25 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@if (IsPost)
+{
+    var userAdminLogic = DependencyResolver.UserAdminLogic;
+    string userLog = Request.Params["userLog"] ?? string.Empty;
+    string userPas = Request.Params["userPas"] ?? string.Empty;
+    int.TryParse(Request.Params["userRole"], out int fieldId);
+    if (!userLog.Equals("") && !userPas.Equals(""))
+    {
+        var userAdmin = new UserAdmin
+        {
+            login = userLog,
+            pass = userPas,
+            adminOrUser = fieldId,
+        };
+        userAdminLogic.UpdateUserAdmin(userAdmin);
+
+    }
+
+    Response.Redirect("~/AllUserAdmin.cshtml");
+}
+

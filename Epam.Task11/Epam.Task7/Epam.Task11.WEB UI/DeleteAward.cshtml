@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+   
+        @RenderPage("~/_deleteAward.cshtml")
+        <form action="" method="post">
+            <div>
+                <label>Select id of award for delete: </label>
+                <input type="number" min="0" step="1" name="idAward" value="" />
+                <input type="submit" name="delete" value="delete" />
+            </div>
+        </form>
+        <a href="~/AllAwards.cshtml">Back</a>
+</body>
+</html>

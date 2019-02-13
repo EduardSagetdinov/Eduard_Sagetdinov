@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <label>Awards:</label>
+        @RenderPage("~/_allAwards.cshtml")
+        <label>Users:</label>
+        @RenderPage("~/_allUsers.cshtml")
+        @RenderPage("~/_addAwardToUser.cshtml")
+        <form action="" method="post">
+            <label>Choose some id of user for award:</label>
+            <input type="number" min="0" step="1" name="iduser" value="" />
+            <label>Choose some id of award for user:</label>
+            <input type="number" min="0" step="1" name="idaward" value="" />
+            <input type="submit" name="done" value="done" />
+            </form>
+    </div>
+    <a href="~/AllInfoUser.cshtml">All info about users</a>
+</body>
+</html>

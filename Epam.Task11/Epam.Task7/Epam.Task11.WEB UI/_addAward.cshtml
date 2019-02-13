@@ -1,0 +1,28 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@if (IsPost)
+{
+    var awardLogic = DependencyResolver.AwardLogic;
+    string nameAward = Request.Params["nameAward"] ?? string.Empty;
+    string photoPath = Request.Params["photoAward"] ?? string.Empty;
+    if (photoPath.Length == 0)
+    {
+        photoPath = "https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg";
+    }
+    if (!nameAward.Equals(""))
+    {
+        var award = new Awards
+        {
+            Title = nameAward,
+            photoLink = photoPath,
+
+        };
+        awardLogic.AddAward(award);
+
+    }
+
+    Response.Redirect("~/AllAwards.cshtml");
+}
+

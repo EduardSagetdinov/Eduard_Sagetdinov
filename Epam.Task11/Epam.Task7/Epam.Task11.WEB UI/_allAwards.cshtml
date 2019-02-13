@@ -1,0 +1,28 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Photo</th>
+    </tr>
+
+    @{
+        var awardLogic = DependencyResolver.AwardLogic;
+
+        var sss = awardLogic.GetAll();
+        foreach (var award in sss)
+        {
+            <tr>
+                <th><p>@award.Id</p></th>
+                <th><p>@award.Title</p></th>
+                <th><img src="@award.photoLink" width="50" height="50" alt="Награда"></th>
+            </tr>
+
+        }
+    }
+
+</table>
+

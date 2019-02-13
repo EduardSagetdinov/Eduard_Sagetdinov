@@ -1,0 +1,3 @@
+0 Oscar https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg
+1 New_Medal https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg
+2 Medal https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg

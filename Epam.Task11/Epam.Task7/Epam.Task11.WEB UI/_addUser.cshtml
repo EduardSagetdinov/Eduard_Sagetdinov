@@ -1,0 +1,28 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@if (IsPost)
+{
+    var userLogic = DependencyResolver.UserLogic;
+    string nameuser = Request.Params["nameuser"] ?? string.Empty;
+    DateTime.TryParse(Request.Params["ageuser"], out DateTime ageuser);
+    string userPhoto = Request.Params["userPhoto"] ?? string.Empty;
+    if (userPhoto.Length == 0)
+    {
+        userPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69ZfwZPfQ4JKyO4RbcYTF6Ga6nngAO__p35KL45YtrlL0OYEh";
+    }
+    if (!nameuser.Equals("") && ageuser != null)
+    {
+        var user = new User
+        {
+            Name = nameuser,
+            DateOfBirth = ageuser,
+            photoUserLink = userPhoto,
+        };
+        userLogic.AddUser(user);
+
+    }
+
+    Response.Redirect("/AllUsers.cshtml");
+}

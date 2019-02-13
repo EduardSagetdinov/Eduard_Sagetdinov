@@ -1,0 +1,33 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+<table>
+    <tr>
+        <th>Login</th>
+        <th>Password</th>
+        <th>Role</th>
+    </tr>
+
+    @{
+        var userAdminLogic = DependencyResolver.UserAdminLogic;
+
+        var sss = userAdminLogic.GetAll();
+        foreach (var userAdmin in sss)
+        {
+            <tr>
+                <th><p>@userAdmin.login</p></th>
+                <th><p>@userAdmin.pass</p></th>
+                @if(userAdmin.adminOrUser == 1)
+                {
+                    <th><p>Administrator</p></th>
+                }else{
+                    <th><p>User</p></th>
+	            }
+            </tr>
+
+        }
+    }
+
+</table>
+

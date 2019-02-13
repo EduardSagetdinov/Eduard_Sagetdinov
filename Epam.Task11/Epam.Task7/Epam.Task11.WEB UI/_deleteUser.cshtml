@@ -1,0 +1,14 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@if (IsPost)
+{
+    var userLogic = DependencyResolver.UserLogic;
+    string idUser = Request.Params["iduser"] ?? string.Empty;
+    int.TryParse(idUser, out int userdelete);
+    userLogic.DeleteUser(userdelete);
+    Response.RemoveOutputCacheItem("/AllUsers.cshtml");
+    Response.Redirect("/AllUsers.cshtml");
+
+}

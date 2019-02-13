@@ -1,0 +1,14 @@
+﻿@using System;
+@using Epam.Task7.Users.BLL.Interface;
+@using Epam.Task7.Users.Common;
+@using Epam.Task7.Users.Entities;
+@if (IsPost)
+{
+    var userAwardLogic = DependencyResolver.UserAwardsLogic;
+    int.TryParse(Request.Params["idUser"], out int userDelete);
+    string idAward = Request.Params["idAward"] ?? string.Empty;
+    int.TryParse(idAward, out int awardDelete);
+    userAwardLogic.DelUserAward(userDelete, awardDelete);
+    Response.Redirect("~/AllAwards.cshtml");
+
+}
