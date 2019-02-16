@@ -8,6 +8,6 @@
     string idAward = Request.Params["idAward"] ?? string.Empty;
     int.TryParse(idAward, out int awardDelete);
     awardLogic.DelAward(awardDelete);
-    Response.Redirect("~/AllAwards.cshtml");
+    Response.Redirect("~/AllAwards");
 
 }

@@ -12,14 +12,14 @@
     {
         var userAdmin = new UserAdmin
         {
-            login = userLog,
-            pass = userPas,
-            adminOrUser = fieldId,
+            Login = userLog,
+            Pass = userPas,
+            AdminOrUser = fieldId,
         };
         userAdminLogic.UpdateUserAdmin(userAdmin);
 
     }
 
-    Response.Redirect("~/AllUserAdmin.cshtml");
+    Response.Redirect("~/AllUserAdmin");
 }
 

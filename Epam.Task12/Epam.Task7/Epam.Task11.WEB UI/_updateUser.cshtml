@@ -20,11 +20,11 @@
             Id = idUs,
             Name = nameuser,
             DateOfBirth = ageuser,
-            photoUserLink = photo,
+            PhotoUserLink = photo,
         };
         userLogic.UpdateUser(user);
 
     }
 
-    Response.Redirect("/AllUsers.cshtml");
+    Response.Redirect("/AllUsers");
 }

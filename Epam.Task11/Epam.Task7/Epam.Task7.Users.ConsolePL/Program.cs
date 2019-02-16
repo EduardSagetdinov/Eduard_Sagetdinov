@@ -49,7 +49,7 @@ namespace Epam.Task7.Users.ConsolePL
 
              AddUser(userLogic);
 
-             userLogic.DeleteUser(3);
+             userLogic.DeleteUser(4);
 
              AddUser(userLogic);
              AddUser(userLogic);

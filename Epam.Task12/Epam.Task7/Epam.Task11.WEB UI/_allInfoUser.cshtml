@@ -21,11 +21,11 @@
         {
     <tr>
         <th><p>@user.Id</p></th>
-        <th><img src="@user.photoUserLink" width="50" height="50" /></th>
+        <th><img src="@user.PhotoUserLink" width="50" height="50"/></th>
         <th><p>@user.Name</p></th>
         <th><p>@user.DateOfBirth</p></th>
         <th><p>@(DateTime.Now.Year - user.DateOfBirth.Year)</p></th>
-        <th><p>
+        <th>
     @foreach (var item in userAwardLogic.GetAwardsOfUser(user))
     {
         @item
@@ -35,7 +35,7 @@
     {
         <img src="@punct" width="50" height="50" />
     }
-    </p></th>
+   </th>
     </tr>
 
         }

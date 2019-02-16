@@ -9,12 +9,10 @@ namespace Epam.Task7.Users.BLL
     {
         private const string AllUsersCacheKey = "GetAllAwards";
         private readonly IAwardsDao awardsDao;
-        private readonly ICacheLogic cacheLogicAwards;
-
-        public AwardLogic(IAwardsDao awardsDao, ICacheLogic cacheLogic)
+        
+        public AwardLogic(IAwardsDao awardsDao)
         {
             this.awardsDao = awardsDao;
-            this.cacheLogicAwards = cacheLogic;
         }
 
         public void AddAward(Awards award)

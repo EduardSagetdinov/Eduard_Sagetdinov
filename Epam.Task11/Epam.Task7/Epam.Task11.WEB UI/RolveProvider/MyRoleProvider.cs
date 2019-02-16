@@ -1,9 +1,6 @@
-﻿using Epam.Task7.Users.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Security;
+using Epam.Task7.Users.Common;
 
 namespace Epam.Task11.WEB_UI.RolveProvider
 {
@@ -15,20 +12,22 @@ namespace Epam.Task11.WEB_UI.RolveProvider
             {
                 return true;
             }
+
             if (roleName == "User")
             {
                 return true;
             }
+
             return false;
         }
 
         public override string[] GetRolesForUser(string username)
         {
             var userAdminLogic = DependencyResolver.UserAdminLogic;
-            switch (userAdminLogic.isAdminOrUser(username))
+            switch (userAdminLogic.IsAdminOrUser(username))
             {
                 case true:
-                    return new[] {"Admin"};
+                    return new[] { "Admin" };
                 default:
                     return new[] { "User" };
             }
@@ -36,14 +35,12 @@ namespace Epam.Task11.WEB_UI.RolveProvider
 
         #region NotImplemented
 
-
+        public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override string[] GetAllRoles()
         {
             throw new NotImplementedException();
         }
-
-        public override string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
@@ -69,8 +66,6 @@ namespace Epam.Task11.WEB_UI.RolveProvider
         {
             throw new NotImplementedException();
         }
-
-      
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {

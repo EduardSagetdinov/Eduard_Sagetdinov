@@ -7,8 +7,8 @@ namespace Epam.Task7.Users.Entities
 {
     public class UserAwardsFakeDao : IUserAwardsDao
     {
-        private const string FileUsersAwardsPath = "C:/Users/123/source/repos/Epam.Task7_1/Epam.Task7/usersAwards.txt";
-
+        private static string fileUsersAwardsPath = Path.GetTempPath() + "usersAwards.txt";
+        
         public void AddUserAward(UsersAwards userAward)
         {
             int userId = 0;
@@ -18,7 +18,7 @@ namespace Epam.Task7.Users.Entities
 
             FileExists();
 
-            var listOfUsersAwards = File.ReadAllLines(FileUsersAwardsPath);
+            var listOfUsersAwards = File.ReadAllLines(fileUsersAwardsPath);
             if (listOfUsersAwards.Length != 0)
             {
                 foreach (var item in listOfUsersAwards)
@@ -36,7 +36,7 @@ namespace Epam.Task7.Users.Entities
 
             if (count == 0)
             {
-                using (StreamWriter newUserAward = File.AppendText(FileUsersAwardsPath))
+                using (StreamWriter newUserAward = File.AppendText(fileUsersAwardsPath))
                 {
                     newUserAward.WriteLine(userAward.ToString());
                 }
@@ -49,7 +49,7 @@ namespace Epam.Task7.Users.Entities
             int awardId = 0;
             string[] usersAwards;
             FileExists();
-            var listOfUsersAwards = File.ReadAllLines(FileUsersAwardsPath).ToList();
+            var listOfUsersAwards = File.ReadAllLines(fileUsersAwardsPath).ToList();
             foreach (var item in listOfUsersAwards)
             {
                 usersAwards = item.Split(' ');
@@ -58,7 +58,7 @@ namespace Epam.Task7.Users.Entities
                 if ((userId == idUser) && (awardId == idAward))
                 {
                     listOfUsersAwards.Remove(item);
-                    File.WriteAllLines(FileUsersAwardsPath, listOfUsersAwards);
+                    File.WriteAllLines(fileUsersAwardsPath, listOfUsersAwards);
                     break;
                 }
             }
@@ -67,10 +67,10 @@ namespace Epam.Task7.Users.Entities
         public IEnumerable<UsersAwards> GetAllUserAward()
         {
             FileExists();
-            var arrayOfUsersAwards = File.ReadAllLines(FileUsersAwardsPath);
+            var arrayOfUsersAwards = File.ReadAllLines(fileUsersAwardsPath);
             List<UsersAwards> awardList = new List<UsersAwards>();
             string line;
-            using (StreamReader streamReader = File.OpenText(FileUsersAwardsPath))
+            using (StreamReader streamReader = File.OpenText(fileUsersAwardsPath))
             {
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -93,7 +93,7 @@ namespace Epam.Task7.Users.Entities
         public bool UpdUserAward(UsersAwards userAward)
         {
             FileExists();
-            var arrayOfUsersAwards = File.ReadAllLines(FileUsersAwardsPath);
+            var arrayOfUsersAwards = File.ReadAllLines(fileUsersAwardsPath);
 
             List<string> listOfUsersAwards = arrayOfUsersAwards.ToList();
 
@@ -106,7 +106,7 @@ namespace Epam.Task7.Users.Entities
                     {
                         listOfUsersAwards.Remove(item);
                         listOfUsersAwards.Add(userAward.ToString());
-                        File.WriteAllLines(FileUsersAwardsPath, listOfUsersAwards);
+                        File.WriteAllLines(fileUsersAwardsPath, listOfUsersAwards);
                         return true;
                     }
                 }
@@ -117,9 +117,9 @@ namespace Epam.Task7.Users.Entities
 
         private static void FileExists()
         {
-            if (!File.Exists(FileUsersAwardsPath))
+            if (!File.Exists(fileUsersAwardsPath))
             {
-                using (FileStream fs = File.Create(FileUsersAwardsPath))
+                using (FileStream fs = File.Create(fileUsersAwardsPath))
                 {
                 }
             }

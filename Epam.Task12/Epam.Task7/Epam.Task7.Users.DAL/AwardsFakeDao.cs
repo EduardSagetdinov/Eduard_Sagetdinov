@@ -8,15 +8,15 @@ namespace Epam.Task7.Users.DAL
 {
     public class AwardsFakeDao : IAwardsDao
     {
-        private const string FileAwardsPath = "C:/Users/123/source/repos/Epam.Task7_1/Epam.Task7/Awards.txt";
-
+        private static string fileAwardsPath = Path.GetTempPath() + "Awards.txt";
+   
         private int max = 0;
         
         public void AddAward(Awards award)
         {
             FileExists();
 
-            var listOfAwards = File.ReadAllLines(FileAwardsPath).ToList();
+            var listOfAwards = File.ReadAllLines(fileAwardsPath).ToList();
             var hashAwards = new HashSet<string>();
             if (listOfAwards.Count == 0)
             {
@@ -38,17 +38,17 @@ namespace Epam.Task7.Users.DAL
                 this.max = 0;
             }
            
-            if (hashAwards.Add(award.Title)&& hashAwards.Add(award.photoLink))
+            if (hashAwards.Add(award.Title) && hashAwards.Add(award.PhotoLink))
             {
                 listOfAwards.Add(award.ToString());
-                File.WriteAllLines(FileAwardsPath, listOfAwards);
+                File.WriteAllLines(fileAwardsPath, listOfAwards);
             }
         }
 
         public void DelAward(int id)
         {
             FileExists();
-            var arrayOfAwards = File.ReadAllLines(FileAwardsPath);
+            var arrayOfAwards = File.ReadAllLines(fileAwardsPath);
             List<string> listOfAwards = arrayOfAwards.ToList();
 
             if (listOfAwards.Count != 0)
@@ -59,7 +59,7 @@ namespace Epam.Task7.Users.DAL
                     if (id == int.Parse(infoAward[0]))
                     {
                         listOfAwards.Remove(item);
-                        File.WriteAllLines(FileAwardsPath, listOfAwards);
+                        File.WriteAllLines(fileAwardsPath, listOfAwards);
                         break;
                     }
                 }
@@ -69,10 +69,10 @@ namespace Epam.Task7.Users.DAL
         public IEnumerable<Awards> GetAll()
         {
             FileExists();
-            var arrayOfAwards = File.ReadAllLines(FileAwardsPath);
+            var arrayOfAwards = File.ReadAllLines(fileAwardsPath);
             List<Awards> awardList = new List<Awards>();
             string line;
-            using (StreamReader streamReader = File.OpenText(FileAwardsPath))
+            using (StreamReader streamReader = File.OpenText(fileAwardsPath))
             {
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -85,7 +85,7 @@ namespace Epam.Task7.Users.DAL
                     {
                         Id = id,
                         Title = title,
-                        photoLink = photoAw,
+                        PhotoLink = photoAw,
                     };
                     awardList.Add(awardForDict);
                 }
@@ -97,7 +97,7 @@ namespace Epam.Task7.Users.DAL
         public bool UpdAward(Awards award)
         {
             FileExists();
-            var arrayOfAwards = File.ReadAllLines(FileAwardsPath);
+            var arrayOfAwards = File.ReadAllLines(fileAwardsPath);
 
             List<string> listOfAwards = arrayOfAwards.ToList();
 
@@ -110,7 +110,7 @@ namespace Epam.Task7.Users.DAL
                     {
                         listOfAwards.Remove(item);
                         listOfAwards.Add(award.ToString());
-                        File.WriteAllLines(FileAwardsPath, listOfAwards.ToArray());
+                        File.WriteAllLines(fileAwardsPath, listOfAwards.ToArray());
                         return true;
                     }
                 }
@@ -121,9 +121,9 @@ namespace Epam.Task7.Users.DAL
 
         private static void FileExists()
         {
-            if (!File.Exists(FileAwardsPath))
+            if (!File.Exists(fileAwardsPath))
             {
-                using (FileStream fs = File.Create(FileAwardsPath))
+                using (FileStream fs = File.Create(fileAwardsPath))
                 {
                 }
             }

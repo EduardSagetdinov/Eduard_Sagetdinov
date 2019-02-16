@@ -14,11 +14,11 @@ namespace Epam.Task7.Users.Entities
 
         public DateTime DateOfBirth { get; set; }
 
-        public string photoUserLink { get; set; } = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69ZfwZPfQ4JKyO4RbcYTF6Ga6nngAO__p35KL45YtrlL0OYEh";
+        public string PhotoUserLink { get; set; } = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69ZfwZPfQ4JKyO4RbcYTF6Ga6nngAO__p35KL45YtrlL0OYEh";
 
         public override string ToString()
         {
-            return $"{Id} {Name} {DateOfBirth:dd/MM/yyyy} {DateTime.Now.Year - DateOfBirth.Year} {photoUserLink}";
+            return $"{Id} {Name} {DateOfBirth:dd/MM/yyyy} {DateTime.Now.Year - DateOfBirth.Year} {PhotoUserLink}";
         }
     }
 }

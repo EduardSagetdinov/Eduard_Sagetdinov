@@ -8,7 +8,7 @@ namespace Epam.Task7.Users.DAL
 {
     public class UserFakeDao : IUserDao
     {
-        private const string FileUsersPath = "C:/Users/123/source/repos/Epam.Task7_1/Epam.Task7/Users.txt";
+        private static string fileUsersPath = Path.GetTempPath() + "Users.txt";
         
         private int max = 0;
 
@@ -16,7 +16,7 @@ namespace Epam.Task7.Users.DAL
         {
             FileExists();
 
-            var listOfUsers = File.ReadAllLines(FileUsersPath);
+            var listOfUsers = File.ReadAllLines(fileUsersPath);
 
             if (listOfUsers.Length == 0)
             {
@@ -36,7 +36,7 @@ namespace Epam.Task7.Users.DAL
                 user.Id = ++this.max;
             }
 
-            using (StreamWriter newUser = File.AppendText(FileUsersPath))
+            using (StreamWriter newUser = File.AppendText(fileUsersPath))
             {
                 newUser.WriteLine(user.ToString());
             }
@@ -45,7 +45,7 @@ namespace Epam.Task7.Users.DAL
         public void DeleteUser(int id)
         {
             FileExists();
-            var arrayOfUsers = File.ReadAllLines(FileUsersPath);
+            var arrayOfUsers = File.ReadAllLines(fileUsersPath);
             List<string> listOfUsers = arrayOfUsers.ToList();
 
             if (listOfUsers.Count != 0)
@@ -56,7 +56,7 @@ namespace Epam.Task7.Users.DAL
                     if (id == int.Parse(infoUser[0]))
                     {
                         listOfUsers.Remove(item);
-                        File.WriteAllLines(FileUsersPath, listOfUsers.ToArray());
+                        File.WriteAllLines(fileUsersPath, listOfUsers.ToArray());
                         break;
                     }
                 }
@@ -66,7 +66,7 @@ namespace Epam.Task7.Users.DAL
         public bool UpdateUser(User user)
         {
             FileExists();
-            var arrayOfUsers = File.ReadAllLines(FileUsersPath);
+            var arrayOfUsers = File.ReadAllLines(fileUsersPath);
            
            List<string> listOfUsers = arrayOfUsers.ToList();
 
@@ -79,7 +79,7 @@ namespace Epam.Task7.Users.DAL
                     {
                         listOfUsers.Remove(item);
                         listOfUsers.Add(user.ToString());
-                        File.WriteAllLines(FileUsersPath, listOfUsers.ToArray());
+                        File.WriteAllLines(fileUsersPath, listOfUsers.ToArray());
                         return true;
                     }
                 }
@@ -91,10 +91,10 @@ namespace Epam.Task7.Users.DAL
         public IEnumerable<User> GetAll()
         {
             FileExists();
-            var arrayOfUsers = File.ReadAllLines(FileUsersPath);
+            var arrayOfUsers = File.ReadAllLines(fileUsersPath);
             List<User> userList = new List<User>();
             string line;
-            using (StreamReader streamReader = File.OpenText(FileUsersPath))
+            using (StreamReader streamReader = File.OpenText(fileUsersPath))
             {
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -108,7 +108,7 @@ namespace Epam.Task7.Users.DAL
                         Id = id,
                         Name = name,
                         DateOfBirth = birth,
-                        photoUserLink = userPhotoPath,
+                        PhotoUserLink = userPhotoPath,
                     };
                     userList.Add(userForDict);
                 }
@@ -119,9 +119,9 @@ namespace Epam.Task7.Users.DAL
 
         private static void FileExists()
         {
-            if (!File.Exists(FileUsersPath))
+            if (!File.Exists(fileUsersPath))
             {
-                using (FileStream fs = File.Create(FileUsersPath))
+                using (FileStream fs = File.Create(fileUsersPath))
                 {
                 }
             }

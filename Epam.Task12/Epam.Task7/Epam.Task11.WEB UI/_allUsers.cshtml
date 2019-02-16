@@ -15,14 +15,16 @@
         var userLogic = DependencyResolver.UserLogic;
 
         var sss = userLogic.GetAll();
+
         foreach (var user in sss)
         {
+            
             <tr>
                 <th><p>@user.Id</p></th>
                 <th><p>@user.Name</p></th>
                 <th><p>@user.DateOfBirth.ToShortDateString()</p></th>
                 <th><p>@(DateTime.Now.Year - user.DateOfBirth.Year)</p></th>
-                <th><img src="@user.photoUserLink" width="50" height="50" /></th>
+                <th><img src="@user.PhotoUserLink" width="50" height="50" /></th>
             </tr>
 
         }

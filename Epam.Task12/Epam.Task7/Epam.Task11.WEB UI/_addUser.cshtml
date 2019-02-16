@@ -5,24 +5,26 @@
 @if (IsPost)
 {
     var userLogic = DependencyResolver.UserLogic;
+    const string imgDefault = @"https://www.meme-arsenal.com/memes/83830fd17734cb4c59b3beefc0fd24f1.jpg";
     string nameuser = Request.Params["nameuser"] ?? string.Empty;
     DateTime.TryParse(Request.Params["ageuser"], out DateTime ageuser);
-    string userPhoto = Request.Params["userPhoto"] ?? string.Empty;
-    if (userPhoto.Length == 0)
-    {
-        userPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ69ZfwZPfQ4JKyO4RbcYTF6Ga6nngAO__p35KL45YtrlL0OYEh";
-    }
+    string userPhoto =Request.Params["userPhoto"] ?? string.Empty;
+
     if (!nameuser.Equals("") && ageuser != null)
     {
+        if (userPhoto.Length < 10)
+        {
+            userPhoto = imgDefault;
+        }
         var user = new User
         {
             Name = nameuser,
             DateOfBirth = ageuser,
-            photoUserLink = userPhoto,
+            PhotoUserLink = userPhoto,
         };
         userLogic.AddUser(user);
 
     }
 
-    Response.Redirect("/AllUsers.cshtml");
+    Response.Redirect("/AllUsers");
 }

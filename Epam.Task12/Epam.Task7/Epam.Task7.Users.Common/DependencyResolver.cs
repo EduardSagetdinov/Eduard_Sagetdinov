@@ -14,6 +14,7 @@ namespace Epam.Task7.Users.Common
         private static IAwardsDao awardsDao;
 
         private static IUserAwardsDao userAwardsDao;
+
         private static IUserAdminFakeDao userAdminFakeDao;
 
         private static IUserLogic userLogic;
@@ -22,29 +23,22 @@ namespace Epam.Task7.Users.Common
 
         private static IUserAwardsLogic userAwardsLogic;
 
-        private static ICacheLogic cacheLogic;
-        private static IUserAdminLogic userAdminLogic;
+       private static IUserAdminLogic userAdminLogic;
 
-        public static IUserLogic UserLogic => userLogic ?? (userLogic = new UserLogic(UserDao, CacheLogic));
+        public static IUserLogic UserLogic => userLogic ?? (userLogic = new UserLogic(UserDao));
 
-        public static IAwardLogic AwardLogic => awardLogic ?? (awardLogic = new AwardLogic(AwardsDao, CacheLogic));
+        public static IAwardLogic AwardLogic => awardLogic ?? (awardLogic = new AwardLogic(AwardsDao));
 
-        public static IUserAwardsLogic UserAwardsLogic => userAwardsLogic ?? (userAwardsLogic = new UserAwardsLogic(UserAwardsDao, AwardsDao, CacheLogic));
+        public static IUserAwardsLogic UserAwardsLogic => userAwardsLogic ?? (userAwardsLogic = new UserAwardsLogic(UserAwardsDao, AwardsDao));
 
-        public static ICacheLogic CacheLogic => cacheLogic ?? (cacheLogic = new CacheLogic());
-
-        public static IUserAdminLogic UserAdminLogic => userAdminLogic ?? (userAdminLogic = new UserAdminLogic(UserAdminFakeDao, CacheLogic));
+       public static IUserAdminLogic UserAdminLogic => userAdminLogic ?? (userAdminLogic = new UserAdminLogic(UserAdminFakeDao));
 
         public static IUserDao UserDao => userDao ?? (userDao = new UserSqlDao());
 
         public static IUserAdminFakeDao UserAdminFakeDao => userAdminFakeDao ?? (userAdminFakeDao = new UserAdminSqlDao());
         
-
         public static IAwardsDao AwardsDao => awardsDao ?? (awardsDao = new AwardsSqlDao());
-       
-        
 
         public static IUserAwardsDao UserAwardsDao => userAwardsDao ?? (userAwardsDao = new UserAwardsSqlDao());
-       
     }
 }

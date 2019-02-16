@@ -16,16 +16,16 @@
 
             @if (User.IsInRole("Admin"))
             {
-                <a id="newUser" href="~/AddUser.cshtml">Add new user</a>
-                <a id="deleteUser" href="~/DeleteUser.cshtml">Delete user</a>
-                <a id="updateUser" href="~/UpdateUser.cshtml">Update user</a>
+                <a id="newUser" href="~/AddUser">Add new user</a>
+                <a id="deleteUser" href="~/DeleteUser">Delete user</a>
+                <a id="updateUser" href="~/UpdateUser">Update user</a>
             }
             else
             {
                 <h1>Sorry! But I don't know such user! You can to create new account or just to see all users without awards.</h1>
             }
             @RenderPage("~/_allUsers.cshtml")
-            <a id="back" href="~/Index.cshtml">Back</a>
+            <a id="back" href="~/Index">Back</a>
         </div>
         
     </form>

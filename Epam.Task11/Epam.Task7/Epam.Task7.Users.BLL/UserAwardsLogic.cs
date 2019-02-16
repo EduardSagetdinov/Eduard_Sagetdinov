@@ -24,8 +24,7 @@ namespace Epam.Task7.Users.BLL
         {
             if (userAward != null)
             {
-                //this.cacheLogicUserAward.Delete(AllUsersAwardsCacheKey);
-                this.userAwardsDao.AddUserAward(userAward);
+               this.userAwardsDao.AddUserAward(userAward);
             }
         }
 
@@ -55,12 +54,13 @@ namespace Epam.Task7.Users.BLL
             namesOfUserAwards = from t in this.awardsDao.GetAll() where allIdAwards.Contains(t.Id) select t.Title;
             return namesOfUserAwards;
         }
+
         public IEnumerable<string> GetPhotoAwardsOfUser(User user)
         {
             IEnumerable<int> allIdAwards;
             IEnumerable<string> namesOfUserAwards;
             allIdAwards = from f in this.GetAllUserAward() where f.IdUser == user.Id select f.IdAward;
-            namesOfUserAwards = from r in this.awardsDao.GetAll() where allIdAwards.Contains(r.Id) select r.photoLink;
+            namesOfUserAwards = from r in this.awardsDao.GetAll() where allIdAwards.Contains(r.Id) select r.PhotoLink;
             return namesOfUserAwards;
         }
 

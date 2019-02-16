@@ -1,11 +1,7 @@
-﻿using Epam.Task7.Users.BLL.Interface;
+﻿using System.Collections.Generic;
+using Epam.Task7.Users.BLL.Interface;
 using Epam.Task7.Users.DAL.Interface;
 using Epam.Task7.Users.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Epam.Task7.Users.BLL
 {
@@ -20,30 +16,31 @@ namespace Epam.Task7.Users.BLL
             this.userAdminFakeDao = userAdminFakeDao;
             this.cacheLogicUserAdmin = cacheLogic;
         }
+
         public void AddUserAdmin(UserAdmin userAdmin)
         {
             var flag = 0;
+
             if (userAdmin != null)
             {
-                if ((userAdmin.login.Length > 0) && (userAdmin.pass.Length > 0))
+                if ((userAdmin.Login.Length > 0) && (userAdmin.Pass.Length > 0))
                 {
-                   
-                        var test = userAdminFakeDao.GetAll();
-                        foreach(var item in test)
+                        var test = this.userAdminFakeDao.GetAll();
+
+                        foreach (var item in test)
                         {
-                            if (item.login.Contains(userAdmin.login))
+                            if (item.Login.Contains(userAdmin.Login))
                             {
                                 flag = 1;
                             }
                         }
+
                     if (flag == 0)
                     {
                         this.userAdminFakeDao.AddUserAdmin(userAdmin);
                     }
-                    
-                   
-                  
                 }
+
                 flag = 0;
             }
         }
@@ -55,60 +52,67 @@ namespace Epam.Task7.Users.BLL
 
         public IEnumerable<UserAdmin> GetAll()
         {
-            return userAdminFakeDao.GetAll();
+            return this.userAdminFakeDao.GetAll();
         }
 
         public bool UpdateUserAdmin(UserAdmin userAdmin)
         {
-            if ((userAdmin.login.Length > 0) && (userAdmin.pass.Length > 0))
+            if ((userAdmin.Login.Length > 0) && (userAdmin.Pass.Length > 0))
             {
                 this.userAdminFakeDao.UpdateUserAdmin(userAdmin);
                 return true;
             }
+
             return false;
         }
-        public bool isRegistered(string log)
+
+        public bool IsRegistered(string log)
         {
-            var allPeople = userAdminFakeDao.GetAll();
-            foreach(var item in allPeople)
+            var allPeople = this.userAdminFakeDao.GetAll();
+
+            foreach (var item in allPeople)
             {
-                if(item.login == log)
+                if (item.Login == log)
                 {
                     return true;
                 }
-               
             }
+
             return false;
         }
-        public bool isCorrectPass(string log, string pas)
+
+        public bool IsCorrectPass(string log, string pas)
         {
-            var allPeople = userAdminFakeDao.GetAll();
+            var allPeople = this.userAdminFakeDao.GetAll();
+
             foreach (var item in allPeople)
             {
-                if ((item.login == log) && (item.pass == pas))
+                if ((item.Login == log) && (item.Pass == pas))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsAdminOrUser(string log)
+        {
+            var allPeople = this.userAdminFakeDao.GetAll();
+            foreach (var item in allPeople)
+            {
+                if ((item.Login == log) && (item.AdminOrUser == 1))
                 {
                     return true;
                 }
 
-            }
-            return false;
-        }
-        public bool isAdminOrUser(string log)
-        {
-            var allPeople = userAdminFakeDao.GetAll();
-            foreach (var item in allPeople)
-            {
-                if ((item.login == log) && (item.adminOrUser == 1))//1-admin, 0-user
-                {
-                    return true;
-                }
                 if (log == "admin")
                 {
                     return true;
                 }
             }
+
             return false;
         }
     }
-   
 }

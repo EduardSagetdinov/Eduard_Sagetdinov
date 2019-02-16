@@ -10,13 +10,12 @@ namespace Epam.Task7.Users.BLL
     public class UserLogic : IUserLogic
     {
         private const string AllUsersCacheKey = "GetAllUsers";
-        private readonly IUserDao userDao;
-        private readonly ICacheLogic cacheLogicUser;
 
-        public UserLogic(IUserDao userDao, ICacheLogic cacheLogic)
+        private readonly IUserDao userDao;
+        
+        public UserLogic(IUserDao userDao)
         {
             this.userDao = userDao;
-            this.cacheLogicUser = cacheLogic;
         }
 
         public void AddUser(User user)
@@ -25,7 +24,6 @@ namespace Epam.Task7.Users.BLL
             {
                 if ((DateTime.Now.Year - user.DateOfBirth.Year >= 5) && (DateTime.Now.Year - user.DateOfBirth.Year   <= 130))
                 {
-                   // this.cacheLogicUser.Delete(AllUsersCacheKey);
                     this.userDao.AddUser(user);
                 }
             }
@@ -46,20 +44,12 @@ namespace Epam.Task7.Users.BLL
 
         public IEnumerable<User> GetAll()
         {
-            /* var cacheResult = this.cacheLogicUser.Get<IEnumerable<User>>(AllUsersCacheKey);
-             if (cacheResult == null)
-             {
-                 var result = this.userDao.GetAll();
-                 this.cacheLogicUser.Add(AllUsersCacheKey, this.userDao.GetAll());
-                 return result;
-             }
-
-             return cacheResult;*/
-            return userDao.GetAll();
+            return this.userDao.GetAll();
         }
-        public IEnumerable<User> getUserById(int id)
+
+        public IEnumerable<User> GetUserById(int id)
         {
-            var all = userDao.GetAll();
+            var all = this.userDao.GetAll();
             IEnumerable<User> us = from f in all where f.Id == id select f;
             return us;
         }

@@ -9,22 +9,21 @@ namespace Epam.Task7.Users.BLL
     public class UserAwardsLogic : IUserAwardsLogic
     {
         private const string AllUsersAwardsCacheKey = "GetAllUsersAwards";
-        private readonly IUserAwardsDao userAwardsDao;
-        private readonly IAwardsDao awardsDao;
-        private readonly ICacheLogic cacheLogicUserAward;
 
-        public UserAwardsLogic(IUserAwardsDao userAwardsDao, IAwardsDao awardsDao, ICacheLogic cacheLogic)
+        private readonly IUserAwardsDao userAwardsDao;
+
+        private readonly IAwardsDao awardsDao;
+       
+        public UserAwardsLogic(IUserAwardsDao userAwardsDao, IAwardsDao awardsDao)
         {
             this.userAwardsDao = userAwardsDao;
             this.awardsDao = awardsDao;
-            this.cacheLogicUserAward = cacheLogic;
         }
 
         public void AddUserAward(UsersAwards userAward)
         {
             if (userAward != null)
             {
-                //this.cacheLogicUserAward.Delete(AllUsersAwardsCacheKey);
                 this.userAwardsDao.AddUserAward(userAward);
             }
         }
@@ -36,14 +35,6 @@ namespace Epam.Task7.Users.BLL
 
         public IEnumerable<UsersAwards> GetAllUserAward()
         {
-           /* var cacheResult = this.cacheLogicUserAward.Get<IEnumerable<UsersAwards>>(AllUsersAwardsCacheKey);
-            if (cacheResult == null)
-            {
-                var result = this.userAwardsDao.GetAllUserAward();
-                this.cacheLogicUserAward.Add(AllUsersAwardsCacheKey, this.userAwardsDao.GetAllUserAward());
-                return result;
-            }
-*/
             return this.userAwardsDao.GetAllUserAward();
         }
 
@@ -55,12 +46,13 @@ namespace Epam.Task7.Users.BLL
             namesOfUserAwards = from t in this.awardsDao.GetAll() where allIdAwards.Contains(t.Id) select t.Title;
             return namesOfUserAwards;
         }
+
         public IEnumerable<string> GetPhotoAwardsOfUser(User user)
         {
             IEnumerable<int> allIdAwards;
             IEnumerable<string> namesOfUserAwards;
             allIdAwards = from f in this.GetAllUserAward() where f.IdUser == user.Id select f.IdAward;
-            namesOfUserAwards = from r in this.awardsDao.GetAll() where allIdAwards.Contains(r.Id) select r.photoLink;
+            namesOfUserAwards = from r in this.awardsDao.GetAll() where allIdAwards.Contains(r.Id) select r.PhotoLink;
             return namesOfUserAwards;
         }
 

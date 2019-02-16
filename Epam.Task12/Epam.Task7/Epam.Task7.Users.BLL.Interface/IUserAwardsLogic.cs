@@ -14,6 +14,7 @@ namespace Epam.Task7.Users.BLL.Interface
         IEnumerable<UsersAwards> GetAllUserAward();
 
         IEnumerable<string> GetAwardsOfUser(User user);
+
         IEnumerable<string> GetPhotoAwardsOfUser(User user);
     }
 }

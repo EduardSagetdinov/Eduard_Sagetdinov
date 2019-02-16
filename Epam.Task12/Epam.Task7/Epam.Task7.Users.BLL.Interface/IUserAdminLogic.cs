@@ -1,9 +1,5 @@
-﻿using Epam.Task7.Users.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Epam.Task7.Users.Entities;
 
 namespace Epam.Task7.Users.BLL.Interface
 {
@@ -16,7 +12,9 @@ namespace Epam.Task7.Users.BLL.Interface
         IEnumerable<UserAdmin> GetAll();
 
         bool UpdateUserAdmin(UserAdmin userAdmin);
-        bool isCorrectPass(string log, string pas);
-        bool isAdminOrUser(string log);
+
+        bool IsCorrectPass(string log, string pas);
+
+        bool IsAdminOrUser(string log);
     }
 }

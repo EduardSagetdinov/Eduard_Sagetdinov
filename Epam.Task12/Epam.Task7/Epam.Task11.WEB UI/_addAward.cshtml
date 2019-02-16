@@ -7,22 +7,22 @@
     var awardLogic = DependencyResolver.AwardLogic;
     string nameAward = Request.Params["nameAward"] ?? string.Empty;
     string photoPath = Request.Params["photoAward"] ?? string.Empty;
-    if (photoPath.Length == 0)
+    if (photoPath.Length < 10)
     {
-        photoPath = "https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg";
+        photoPath = @"https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg";
     }
     if (!nameAward.Equals(""))
     {
         var award = new Awards
         {
             Title = nameAward,
-            photoLink = photoPath,
+            PhotoLink = photoPath,
 
         };
         awardLogic.AddAward(award);
 
     }
 
-    Response.Redirect("~/AllAwards.cshtml");
+    Response.Redirect("~/AllAwards");
 }
 

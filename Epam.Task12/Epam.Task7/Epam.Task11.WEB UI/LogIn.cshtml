@@ -22,7 +22,7 @@
         {
             var user = Request["UserName"];
             var password = Request["Password"];
-            if (userAdminLogic.isCorrectPass(user, password) || (user == "admin" && password == "admin"))
+            if (userAdminLogic.IsCorrectPass(user, password) || (user == "admin" && password == "admin"))
             {
                 FormsAuthentication.SetAuthCookie(user, createPersistentCookie: true);
             }
@@ -32,7 +32,7 @@
             }
             Response.Redirect("~");
         }
-        <form action="~/LogIn.cshtml" method="post">
+        <form action="~/LogIn" method="post">
             <label for="UserName">Login</label>
             <input type="text" id="UserName" name="UserName" />
             <label for="Password">Password</label>

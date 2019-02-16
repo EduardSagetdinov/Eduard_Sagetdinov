@@ -9,6 +9,7 @@ namespace Epam.Task7.Users.ConsolePL
     {
         public static void Main(string[] args)
         {
+            var userAdminLogic = DependencyResolver.UserAdminLogic;
             var userLogic = DependencyResolver.UserLogic;
             var awardsLogic = DependencyResolver.AwardLogic;
             var userAwardsLogik = DependencyResolver.UserAwardsLogic;
@@ -37,7 +38,6 @@ namespace Epam.Task7.Users.ConsolePL
                 IdUser = 1,
                 IdAward = 0,
             };
-             userAwardsLogik.AddUserAward(usersAwards);
              awardsLogic.AddAward(ironCross);
              awardsLogic.AddAward(medalForHonor);
              awardsLogic.AddAward(redStar);
@@ -70,8 +70,8 @@ namespace Epam.Task7.Users.ConsolePL
             userLogic.UpdateUser(user3);
             ShowUser(userLogic);
              ShowAward(awardsLogic);
-             ShowUserAward(userAwardsLogik);
-             ShowAwardsOfUser(userAwardsLogik, user3);
+            ShowUserAward(userAwardsLogik);
+            ShowAwardsOfUser(userAwardsLogik, user3);
         }
 
         private static void ShowAwardsOfUser(IUserAwardsLogic userAwardsLogik, User user1)
@@ -98,7 +98,7 @@ namespace Epam.Task7.Users.ConsolePL
             Console.WriteLine("ID|Name|  Birth |Age");
             foreach (var user in userLogic.GetAll())
             {
-                Console.WriteLine(user);
+                Console.WriteLine(user.Name);
             }
         }
 

@@ -1,35 +1,22 @@
-﻿using Epam.Task7.Users.DAL.Interface;
-using Epam.Task7.Users.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Epam.Task7.Users.DAL.Interface;
+using Epam.Task7.Users.Entities;
 
 namespace Epam.Task7.Users.DAL
 {
     public class UserAdminFakeDao : IUserAdminFakeDao
     {
-        private const string FileUserAdminPath = "C:/Users/123/source/repos/Epam.Task7_1/Epam.Task7/UserAdmin.txt";
-        private static void FileExists()
-        {
-            if (!File.Exists(FileUserAdminPath))
-            {
-                using (FileStream fs = File.Create(FileUserAdminPath))
-                {
-                }
-            }
-        }
+        private static string fileUserAdminPath = Path.GetTempPath() + "UserAdmin.txt";
+   
         public void AddUserAdmin(UserAdmin userAdmin)
         {
             FileExists();
 
-            var listOfUserAdmin = File.ReadAllLines(FileUserAdminPath);
+            var listOfUserAdmin = File.ReadAllLines(fileUserAdminPath);
 
-
-
-            using (StreamWriter newUser = File.AppendText(FileUserAdminPath))
+            using (StreamWriter newUser = File.AppendText(fileUserAdminPath))
             {
                 newUser.WriteLine(userAdmin.ToString());
             }
@@ -38,7 +25,7 @@ namespace Epam.Task7.Users.DAL
         public void DeleteUserAdmin(string login)
         {
             FileExists();
-            var arrayOfUserAdmin = File.ReadAllLines(FileUserAdminPath);
+            var arrayOfUserAdmin = File.ReadAllLines(fileUserAdminPath);
             List<string> listOfUserAdmin = arrayOfUserAdmin.ToList();
 
             if (listOfUserAdmin.Count != 0)
@@ -49,7 +36,7 @@ namespace Epam.Task7.Users.DAL
                     if (login == infoUserAdmin[0])
                     {
                         listOfUserAdmin.Remove(item);
-                        File.WriteAllLines(FileUserAdminPath, listOfUserAdmin.ToArray());
+                        File.WriteAllLines(fileUserAdminPath, listOfUserAdmin.ToArray());
                         break;
                     }
                 }
@@ -59,10 +46,10 @@ namespace Epam.Task7.Users.DAL
         public IEnumerable<UserAdmin> GetAll()
         {
             FileExists();
-            var arrayOfUsers = File.ReadAllLines(FileUserAdminPath);
+            var arrayOfUsers = File.ReadAllLines(fileUserAdminPath);
             List<UserAdmin> userAdminList = new List<UserAdmin>();
             string line;
-            using (StreamReader streamReader = File.OpenText(FileUserAdminPath))
+            using (StreamReader streamReader = File.OpenText(fileUserAdminPath))
             {
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -72,9 +59,9 @@ namespace Epam.Task7.Users.DAL
                     int adminOrNotAdmin = int.Parse(oneUserAdmin[2]);
                     UserAdmin userAdminForDict = new UserAdmin
                     {
-                        login = log,
-                        pass = password,
-                        adminOrUser = adminOrNotAdmin,
+                        Login = log,
+                        Pass = password,
+                        AdminOrUser = adminOrNotAdmin,
                     };
                     userAdminList.Add(userAdminForDict);
                 }
@@ -86,7 +73,7 @@ namespace Epam.Task7.Users.DAL
         public bool UpdateUserAdmin(UserAdmin userAdmin)
         {
             FileExists();
-            var arrayOfUserAdmin = File.ReadAllLines(FileUserAdminPath);
+            var arrayOfUserAdmin = File.ReadAllLines(fileUserAdminPath);
 
             List<string> listOfUserAdmin = arrayOfUserAdmin.ToList();
 
@@ -95,11 +82,11 @@ namespace Epam.Task7.Users.DAL
                 foreach (var item in listOfUserAdmin.ToList())
                 {
                     string[] infoUserAdmin = item.Split(' ');
-                    if (userAdmin.login == infoUserAdmin[0])
+                    if (userAdmin.Login == infoUserAdmin[0])
                     {
                         listOfUserAdmin.Remove(item);
                         listOfUserAdmin.Add(userAdmin.ToString());
-                        File.WriteAllLines(FileUserAdminPath, listOfUserAdmin.ToArray());
+                        File.WriteAllLines(fileUserAdminPath, listOfUserAdmin.ToArray());
                         return true;
                     }
                 }
@@ -107,6 +94,15 @@ namespace Epam.Task7.Users.DAL
 
             return false;
         }
+
+        private static void FileExists()
+        {
+            if (!File.Exists(fileUserAdminPath))
+            {
+                using (FileStream fs = File.Create(fileUserAdminPath))
+                {
+                }
+            }
+        }
     }
 }
-

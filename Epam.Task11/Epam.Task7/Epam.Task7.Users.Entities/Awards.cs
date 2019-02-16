@@ -12,11 +12,11 @@ namespace Epam.Task7.Users.Entities
 
         public string Title { get; set; }
 
-        public string photoLink { get; set; } = "https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg";
+        public string PhotoLink { get; set; } = "https://www.dewir.ru/components/com_jshopping/files/img_products/full_MS_0421.jpg";
 
         public override string ToString()
         {
-            return $"{Id} {Title} {photoLink}"; 
+            return $"{Id} {Title} {PhotoLink}"; 
         }
     }
 }

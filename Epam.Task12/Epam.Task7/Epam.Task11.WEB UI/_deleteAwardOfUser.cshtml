@@ -9,6 +9,6 @@
     string idAward = Request.Params["idAward"] ?? string.Empty;
     int.TryParse(idAward, out int awardDelete);
     userAwardLogic.DelUserAward(userDelete, awardDelete);
-    Response.Redirect("~/AllAwards.cshtml");
+    Response.Redirect("~/AllAwards");
 
 }

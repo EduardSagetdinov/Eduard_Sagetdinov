@@ -16,9 +16,9 @@
         foreach (var userAdmin in sss)
         {
             <tr>
-                <th><p>@userAdmin.login</p></th>
-                <th><p>@userAdmin.pass</p></th>
-                @if(userAdmin.adminOrUser == 1)
+                <th><p>@userAdmin.Login</p></th>
+                <th><p>@userAdmin.Pass</p></th>
+                @if(userAdmin.AdminOrUser == 1)
                 {
                     <th><p>Administrator</p></th>
                 }else{

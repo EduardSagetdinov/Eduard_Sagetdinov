@@ -8,7 +8,6 @@
     string idUser = Request.Params["iduser"] ?? string.Empty;
     int.TryParse(idUser, out int userdelete);
     userLogic.DeleteUser(userdelete);
-    Response.RemoveOutputCacheItem("/AllUsers.cshtml");
-    Response.Redirect("/AllUsers.cshtml");
+    Response.Redirect("/AllUsers");
 
 }

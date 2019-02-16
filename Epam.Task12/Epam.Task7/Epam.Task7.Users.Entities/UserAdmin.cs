@@ -8,12 +8,15 @@ namespace Epam.Task7.Users.Entities
 {
     public class UserAdmin
     {
-        public string login { get; set; }
-        public string pass { get; set; }
-        public int adminOrUser { get; set; }
+        public string Login { get; set; }
+
+        public string Pass { get; set; }
+
+        public int AdminOrUser { get; set; }
+
         public override string ToString()
         {
-            return $"{login} {pass} {adminOrUser}"; 
+            return $"{Login} {Pass} {AdminOrUser}"; 
         }
     }
 }

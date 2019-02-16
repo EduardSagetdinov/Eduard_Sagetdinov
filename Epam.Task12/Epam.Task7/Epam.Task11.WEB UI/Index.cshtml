@@ -14,11 +14,11 @@
     <title></title>
 </head>
 <body>
-    <form action="/AllUsers.cshtml" method="post" id="users">
+    <form action="/AllUsers" method="post" id="users">
         <div>
             @if (User.Identity.IsAuthenticated)
             {
-                <a href="~/LogOut.cshtml">Log out</a>
+                <a href="~/LogOut">Log out</a>
                 if (User.IsInRole("Admin"))
                 {
                     <p>Admin</p>
@@ -26,21 +26,21 @@
             }
             else
             {
-                <a href="~/LogIn.cshtml">Log in</a>
+                <a href="~/LogIn">Log in</a>
             }
             <p>Hello, @User.Identity.Name</p>
 
            
             @if (User.IsInRole("User"))
             {
-                <a href="~/AllInfoUser.cshtml">Users and Awards</a>
+                <a href="~/AllInfoUser">Users and Awards</a>
             }
             @if (User.IsInRole("Admin"))
             {
-                <a href="/AllUsers.cshtml">Users</a>
-                <a href="~/AllAwards.cshtml">Awards</a>
-                <a href="~/AllInfoUser.cshtml">Users and Awards</a>
-                <a href="~/AboutUsers.cshtml">User's politics</a>
+                <a href="/AllUsers">Users</a>
+                <a href="~/AllAwards">Awards</a>
+                <a href="~/AllInfoUser">Users and Awards</a>
+                <a href="~/AboutUsers">User's politics</a>
             }
 
         </div>
