@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+
+@{
+    Page.Title = "Role management";
+    var mode = Role.Mode;
+    Layout = "~/Admin/_AdminLayout.cshtml";
+    if (!WebUser.HasRole(UserRoles.Admin))
+    {
+        Response.Redirect("~/admin/");
+    }
+
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+
+
+    @using Epam.TaskFinal.Blog.App_Code;
+    @using Epam.TaskFinal.Blog.App_Code.Data;
+
+
+    @{ if (!mode.IsEmpty())
+        {
+            var role = Role.Current;
+            <div>
+                <form name="role" method="post" action="~/Admin/Role.ashx">
+                    @AntiForgery.GetHtml()
+                    <input type="hidden" name="mode" value="@mode" />
+                    <input type="hidden" name="roleId" value="@role.Id" />
+                    <p>Name: <input type="text" name="roleName" value="@role.Name" /></p>
+
+                    <p><input type="submit" name="roleSubmit" value="Submit" /></p>
+                </form>
+            </div>
+        }
+        else
+        {
+            @AntiForgery.GetHtml()
+
+            <p><a href="~/Admin/Role/new/">Create New Role</a></p>
+            var grid = new WebGrid(source: RoleRepository.GetAll(orderBy: "Name"),
+                rowsPerPage: 30);
+            @grid.GetHtml(
+           columns: grid.Columns(
+               grid.Column(format: @<a href="~/Admin/role/edit/@item.Name">Edit</a>),
+                         grid.Column(format: @<a data-mode="delete" data-action="/admin/role.ashx" data-item="@item.Name" href="~/Admin/role/delete/@item.Name">Delete</a>),
+                             grid.Column("Name")
+                                   )
+                                       );
+        }
+    }
+
+</body>
+</html>

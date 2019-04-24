@@ -1,0 +1,7 @@
+﻿@using Epam.TaskFinal.Blog.App_Code;
+@{
+    if (!WebUser.IsAuthenticated)
+    {
+        Response.Redirect("~/login/");
+    }
+}
