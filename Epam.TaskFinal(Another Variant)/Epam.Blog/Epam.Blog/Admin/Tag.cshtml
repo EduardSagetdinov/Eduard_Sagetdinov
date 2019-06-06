@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+@using Epam.Blog.Bll;
+@using Epam.Blog.Entities;
+
+@{
+    TagBll tagBll = new TagBll();
+    WebUserBll webUserBll = new WebUserBll();
+    Page.Title = "Tag management";
+    var mode = tagBll.Mode;
+    var message = string.Empty;
+    Layout = "~/Admin/_AdminLayout.cshtml";
+
+    if (!webUserBll.HasRole(UsersRolesMap.Admin) && !webUserBll.HasRole(UsersRolesMap.Editor))
+    {
+        Response.Redirect("~/admin/");
+    }
+
+   
+
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+      
+
+
+
+
+    @{ if (!mode.IsEmpty())
+        {
+            var tag = tagBll.Current;
+    <div>
+        <div class="error">@message</div>
+        <form name="tag" method="post" action="~/Admin/Tag.ashx">
+            @AntiForgery.GetHtml()
+            <input type="hidden" name="mode" value="@mode" />
+            <input type="hidden" name="tagId" value="@tag.Id" />
+            <p>Name: <input type="text" name="tagName" value="@tag.Name" /></p>
+            <p>Friendly Name: <input type="text" name="tagFriendlyName" value="@tag.UrlFriendlyName" /></p>
+
+            <p><input type="submit" name="tagSubmit" value="Submit" /></p>
+        </form>
+
+
+    </div>
+        }
+        else
+        {
+            @AntiForgery.GetHtml()
+            <p><a href="~/Admin/Tag/new/">Create New Tag</a></p>
+            var grid = new WebGrid(source: tagBll.GetAllTags(orderBy: "Name"),
+                rowsPerPage: 30);
+            @grid.GetHtml(
+           columns: grid.Columns(
+               grid.Column(format: @<a href="~/Admin/tag/edit/@item.UrlFriendlyName">Edit</a>),
+                                   grid.Column(format: @<a data-mode="delete" data-action="/admin/tag.ashx" data-item="@item.UrlFriendlyName" href="~/Admin/tag/delete/@item.UrlFriendlyName">Delete</a>),
+                                         grid.Column("Name"),
+                                         grid.Column("UrlFriendlyName", header: "Friendly Name")
+                                               )
+                                                   );
+        }
+    }
+
+</body>
+</html>

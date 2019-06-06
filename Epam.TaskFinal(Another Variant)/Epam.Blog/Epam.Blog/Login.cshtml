@@ -1,0 +1,40 @@
+﻿@using Epam.Blog.Bll;
+@{
+    Page.Title = "Login";
+    Layout = "~/_SiteLayout.cshtml";
+
+    var message = string.Empty;
+
+    if (IsPost)
+    {
+        WebUserBll webUserBll = new WebUserBll();
+        var username = Request.Form["username"];
+        var password = Request.Form["password"];
+
+        if (webUserBll.AuthenticateAndLogin(username, password))
+        {
+            Response.Redirect("~/admin/");
+        }
+
+        message = "Username and/or password is incorrect.";
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <div class="error">@message</div>
+        <form name="login" method="post">
+            <p><label for="username">Username: </label><input type="text" id="username" name="username" /></p>
+            <p><label for="password">Password: </label><input type="password" id="password" name="password" /></p>
+            <p><input type="submit" value="Login" /></p>
+        </form>
+    </div>
+</body>
+</html>

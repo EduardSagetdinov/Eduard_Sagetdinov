@@ -1,0 +1,8 @@
+﻿@using Epam.Blog.Bll;
+@{
+    WebUserBll webUserBll = new WebUserBll();
+    if (!webUserBll.IsAuthenticated)
+    {
+        Response.Redirect("~/login/");
+    }
+}

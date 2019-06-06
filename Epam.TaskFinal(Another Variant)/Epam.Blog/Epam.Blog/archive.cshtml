@@ -1,0 +1,44 @@
+﻿@using Epam.Blog.Entities
+@using Epam.Blog.Bll
+@{
+    Layout = "~/_SiteLayout.cshtml";
+    var tagBll = new TagBll();
+    var mode = tagBll.Mode;
+    var PostBll = new PostBll();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @if (mode == "post")
+        {
+            @RenderPage("~/_post.cshtml", PostBll.Current, new MarkdownSharp.Markdown())
+        }
+        else if (mode == "tag")
+        {
+            var posts = PostBll.GetPublishedPostsByTag(tagBll.FriendlyName);
+
+            foreach (var post in posts)
+            {
+                @RenderPage("~/_post.cshtml", post, new MarkdownSharp.Markdown());
+            }
+
+        }
+        else if (string.IsNullOrEmpty(mode))
+        {
+            var posts = PostBll.GetPublishedPosts();
+
+            foreach (var post in posts)
+            {
+                @RenderPage("~/_post.cshtml", post, new MarkdownSharp.Markdown());
+            }
+        }
+    </div>
+</body>
+</html>
