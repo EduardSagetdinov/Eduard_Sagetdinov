@@ -1,10 +1,11 @@
-﻿using Epam.Blog.Dal;
+﻿using Epam.Blog.Bll.Interface;
+using Epam.Blog.Dal;
 using Epam.Blog.Entities;
 using NLog;
 
 namespace Epam.Blog.Bll
 {
-    public class UsersRolesMapBll
+    public class UsersRolesMapBll: IUsersRolesMapBll
     {
         private readonly UsersRolesMapDal usersRolesMapDal = new UsersRolesMapDal();
         private static Logger logger = LogManager.GetCurrentClassLogger();

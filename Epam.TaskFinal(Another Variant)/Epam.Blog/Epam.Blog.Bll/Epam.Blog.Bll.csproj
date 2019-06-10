@@ -84,6 +84,10 @@
     <Compile Include="WebUserBll.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epam.Blog.Bll.Interface\Epam.Blog.Bll.Interface.csproj">
+      <Project>{1B4A7C53-C87A-436B-B6A6-6DD869B4D168}</Project>
+      <Name>Epam.Blog.Bll.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epam.Blog.Dal\Epam.Blog.Dal.csproj">
       <Project>{343B390F-CD67-4730-A558-7BF897006B71}</Project>
       <Name>Epam.Blog.Dal</Name>

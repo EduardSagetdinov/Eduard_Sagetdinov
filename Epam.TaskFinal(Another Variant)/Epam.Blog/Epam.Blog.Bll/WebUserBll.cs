@@ -1,4 +1,5 @@
-﻿using Epam.Blog.Dal;
+﻿using Epam.Blog.Bll.Interface;
+using Epam.Blog.Dal;
 using Epam.Blog.Entities;
 using NLog;
 using System;
@@ -12,7 +13,7 @@ using System.Web.SessionState;
 
 namespace Epam.Blog.Bll
 {
-    public class WebUserBll
+    public class WebUserBll: IWebUserBll
     {
         UserDal userDal = new UserDal();
         RoleDal roleDal = new RoleDal();

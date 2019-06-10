@@ -1,4 +1,5 @@
-﻿using Epam.Blog.Dal;
+﻿using Epam.Blog.Bll.Interface;
+using Epam.Blog.Dal;
 using Epam.Blog.Entities;
 using NLog;
 using System;
@@ -8,7 +9,7 @@ using System.Web;
 
 namespace Epam.Blog.Bll
 {
-    public class PostsTagsMapBll
+    public class PostsTagsMapBll: IPostsTagsMapBll
     {
         private readonly PostsTagsMapDal postsTagsMapDal = new PostsTagsMapDal();
         private static Logger logger = LogManager.GetCurrentClassLogger();

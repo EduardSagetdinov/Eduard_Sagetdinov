@@ -1,4 +1,5 @@
-﻿using Epam.Blog.Dal;
+﻿using Epam.Blog.Bll.Interface;
+using Epam.Blog.Dal;
 using Epam.Blog.Entities;
 using NLog;
 using System;
@@ -10,7 +11,7 @@ using System.Web.WebPages;
 
 namespace Epam.Blog.Bll
 {
-    public class UserBll
+    public class UserBll: IUserBll
     {
         private readonly UserDal userDal = new UserDal();
         private readonly RoleDal roleDal = new RoleDal();

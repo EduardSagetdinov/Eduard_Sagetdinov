@@ -1,4 +1,5 @@
-﻿using Epam.Blog.Dal;
+﻿using Epam.Blog.Bll.Interface;
+using Epam.Blog.Dal;
 using Epam.Blog.Entities;
 using NLog;
 using System;
@@ -9,7 +10,7 @@ using System.Web.WebPages;
 
 namespace Epam.Blog.Bll
 {
-    public class RoleBll
+    public class RoleBll: IRoleBll
     {
         private readonly RoleDal roleDal = new RoleDal();
         private static Logger logger = LogManager.GetCurrentClassLogger();

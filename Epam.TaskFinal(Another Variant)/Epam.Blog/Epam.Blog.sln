@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Blog.Dal", "Epam.Blog.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Blog.Bll", "Epam.Blog.Bll\Epam.Blog.Bll.csproj", "{E574796B-BB14-4535-903E-860EA2F11423}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epam.Blog.Bll.Interface", "Epam.Blog.Bll.Interface\Epam.Blog.Bll.Interface.csproj", "{1B4A7C53-C87A-436B-B6A6-6DD869B4D168}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{E574796B-BB14-4535-903E-860EA2F11423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E574796B-BB14-4535-903E-860EA2F11423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E574796B-BB14-4535-903E-860EA2F11423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B4A7C53-C87A-436B-B6A6-6DD869B4D168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B4A7C53-C87A-436B-B6A6-6DD869B4D168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B4A7C53-C87A-436B-B6A6-6DD869B4D168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B4A7C53-C87A-436B-B6A6-6DD869B4D168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

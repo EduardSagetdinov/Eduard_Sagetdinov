@@ -1,4 +1,5 @@
-﻿using Epam.Blog.Dal;
+﻿using Epam.Blog.Bll.Interface;
+using Epam.Blog.Dal;
 using Epam.Blog.Entities;
 using NLog;
 using System;
@@ -9,7 +10,7 @@ using System.Web.WebPages;
 
 namespace Epam.Blog.Bll
 {
-    public class TagBll
+    public class TagBll: ITagBll
     {
         private readonly TagDal tagDal = new TagDal();
         private static Logger logger = LogManager.GetCurrentClassLogger();
